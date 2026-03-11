@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>hair stylers</title>
+<link rel="icon" type="image/png" href="favicon.png">
+
+        <style>
+     .up-arrow {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color:#75163F ; /* Green color */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .up-arrow::before {
+            content: '\2191'; /* Unicode for upward arrow */
+            font-size: 24px;
+            color: white;
+        }
+
+        .up-arrow.show {
+            opacity: 2;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia;
+            background-color: #FFD2B1;
+            color:black;
+        }
+         
+ .navbar {
+ position: sticky;
+            top: 0;
+            background-color:#611234;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px ;
+            z-index: 1000;
+            font-family: georgia;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+           
+            font-family: Broadway;
+        
+        }
+        .logo {
+            height: 50px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            text-transform: uppercase;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            }
+        .icons {
+            display: flex;
+            gap: 30px;
+        }
+        .icons i {
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+        } 
+        
+
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .image-container .info {
+            text-align: center;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            height:auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .info p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: black;
+        }
+
+        .info .price {
+            font-size: 18px;
+            color: #F28689;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background-color: #F28689;
+            color: #121212;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #F28689;
+            transform: scale(1.05);
+        }
+        
+
+footer {
+              background:#75163F ;
+             color: black;
+             padding: 30px 0;
+          }
+
+             .footer-container {
+            display:flex;
+            flex-wrap:wrap; 
+            color: #FFD700;
+            padding:0 20px;
+            margin: auto;
+            justify-content:space-around;
+            max-width:1200px;
+        }
+          .footer-section {
+     padding-right:90px;
+    color:#F28689;
+    width: 200px;
+}
+.footer-section {
+    width: 200px;
+}
+
+.footer-section h3 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: black;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons img {
+    width: 24px;
+}
+
+.payment-icons img {
+    width: 40px;
+    margin: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid white ;
+}
+
+                
+    </style>
+</head>
+<body>
+<div class="up-arrow" id="scrollToTopBtn" onclick="scrollToTop()"></div>
+    <script>
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) { 
+                scrollToTopBtn.classList.add("show");
+            } 
+           else {
+                scrollToTopBtn.classList.remove("show");
+            }
+        });
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script> 
+
+ <div class="navbar">
+        <!-- Left side logo -->
+        <div class="logo-container">
+            <p>HAIRAPY</p>
+        </div>
+
+        <!-- Center navigation links -->
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="hair care products.html">HAIR CARE PRODUCTS</a>
+            <a href="shampoos&conditioner.html">SHAMPOOS & CONDITIONER</a>
+            <a href="hair stylers.html">HAIR STYLERS</a>
+            <a href="hair accessories.html">HAIR ACCESSORIES</a>
+        </div>
+
+        <!-- Right side icons -->
+        <div class="icons">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </div>
+    </div>
+    <center>
+        <h1 style="font-family:Felix Titling;">OUR HAIR STYLERS</h1>
+    </center>
+    <hr style="border: 1px solid #333; width: 90%; margin: 0 auto;">
+ <center>
+        <h1 style="font-family:aladin;">FOR WOMEN</h1>
+    </center>
+
+    <!-- First Row of Images -->
+    <div class="image-container">
+        <div class="info">
+            <img src="S1.jpeg" alt="Image 1">
+             <p> 4.07 | 59 reviews</p>
+            <p>Hairapy Rose Gold Hair Brush Set</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹495.00    <span style="color:black"><strike>₹550.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+     <div class="custom-select">
+<select style="width:80%;">
+<option value="1">Rose gold </option> 
+<option value="2">White</option>
+<option value="3">Black</option> </select></div>
+           </div>
+        <div class="info">
+            <img src="S2.jpeg" alt="Image 2">
+            <p>4.54 | 1483 reviews</p>
+            <p>Hairapy Detangling Brush For Curly Hair </p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹499.00    <span style="color:black"><strike>₹550.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">black&white</option> 
+<option value="2">Pink</option>
+<option value="3">Brown</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S3.jpeg" alt="Image 3">
+            <p> 4.5 | 372 reviews</p>
+            <p>Hairapy Partideal 5 Pcs Hair Brush Set </p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹500.00   <span style="color:black"><strike>₹550.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Golden</option> 
+<option value="2">Brown</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S4.jpeg" alt="Image 4">
+            <p> 4.72 | 296 reviews</p>
+            <p>Hairapy Paddle Brush Set</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹650.00   <span style="color:black"><strike>₹700.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Rose gold</option> 
+<option value="2">Black</option>
+<option value="3">Brown</option> </select></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Second Row of Images -->
+    <div class="image-container">
+        <div class="info">
+            <img src="S5.jpeg" alt="Image 4">
+            <p> 4.82 | 125 reviews</p>
+            <p>Hairapy Airwrap styler</p><br><p>MRP:</p>
+           <p class="price"><span style="color: salmon">₹49,000.00  <span style="color:black"><strike>₹60,000.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Pink</option> 
+<option value="2">Rose gold</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S6.jpeg" alt="Image 5">
+            <p> 4.65 | 128 reviews</p>
+            <p>Hairapy Airwrap Curler & Multi Styler</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹5,570.00  <span style="color:black"><strike>₹60,000.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Orange</option> 
+<option value="2">Pink</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S7.jpeg" alt="Image 6">
+            <p> 4.7 | 66 reviews</p>
+            <p>Hairapy Straightner, Supersonic Hair Dryer, And Curler</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹6,575.00  <span style="color:black"><strike>₹70,000.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Gold</option> 
+<option value="2">Rose gold</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S8.jpeg" alt="Image 6">
+            <p> 4.7 | 76 reviews</p>
+            <p>Hairapy Supersonic Nural Hair Dryer</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹5,984.00  <span style="color:black"><strike>₹6,646.00</strike></span></span></p>
+            <button class="add-to-cart"><span style="color:black">Add to Cart</span></button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Green</option> 
+<option value="2">Pink</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        </div>
+
+    <!-- Third Row of Images -->
+    <div class="image-container">
+        <div class="info">
+            <img src="S9.jpeg" alt="Image 7">
+            <p> 8.7 | 77 reviews</p>
+            <p>Hairapy Hair Straightener Comb</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹2,399.00  <span style="color:black"><strike>₹3,450.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">White</option>
+<option value="2">Black</option>
+<option value="3">Rose gold</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S10.jpeg" alt="Image 8">
+            <p> 4.5 | 56 reviews</p>
+            <p>Hairapy Multi Styler Airwrap</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹8,599.00  <span style="color:black"><strike>₹9,750.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Brown</option> 
+<option value="2">Rose gold</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S11.jpeg" alt="Image 9">
+            <p>7.7 | 96 reviews</p>
+            <p>Hairapy Air Shot All in 1</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹5,249.00  <span style="color:black"><strike>₹6,300.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Rose gold</option> 
+<option value="2">Brown</option>
+<option value="3">Black</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S12.jpeg" alt="Image 6">
+            <p>4.9 | 59 reviews</p>
+            <p>Hairpy Hypersonic Airshot Hair Styler</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹1,375.00  <span style="color:black"><strike>₹1,450.00</strike></span></span</p><br>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">Rose gold</option> 
+<option value="2">Black</option>
+<option value="3">Brown</option> </select></div>
+
+        </div>
+
+    </div>
+
+    <!-- Fourth Row of Images -->
+    <div class="image-container">
+        <div class="info">
+            <img src="S13.jpeg" alt="Image 10">
+            <p>6.5 | 70 reviews</p>
+            <p>Hairapy Hair Styling Set With Hair Crimper, Straightner&Curler</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹4,246.00  <span style="color:black"><strike>₹4,995.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">370ml</option> 
+<option value="2">200ml</option>
+<option value="3">270ml</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S14.jpeg" alt="Image 11">
+            <p>4.3 | 40 reviews</p>
+            <p>Hairapy 5 in 1 Hair Styler Dryer Comb and Styling Tool + Ktein Natural Detox Dry Shampoo</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹1,499.00  <span style="color:black"><strike>₹1,849.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">370ml</option> 
+<option value="2">200ml</option>
+<option value="3">270ml</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S15.jpeg" alt="Image 12">
+            <p>8.1 | 86 reviews</p>
+            <p>Hairapy Hair Dryer And Straightener</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹2,495.00  <span style="color:black"><strike>₹2,595.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">370ml</option> 
+<option value="2">200ml</option>
+<option value="3">270ml</option> </select></div>
+
+        </div>
+        <div class="info">
+            <img src="S16.jpeg" alt="Image 6"><br><br>
+            <p>4.5 | 55 reviews</p>
+            <p>Hairapy Imperial Multifunctional 6 in 1 Hair Styler Hight Speed Ionic Hair Dryer Brush, Hair Dryer</p><br><p>MRP:</p>
+            <p class="price"><span style="color: salmon">₹11,999.00  <span style="color:black"><strike>₹21,990.00</strike></span></span></p>
+            <button class="add-to-cart">Add to Cart</button><br><br>
+<div class="custom-select">
+<select style="width:80%;">
+<option value="1">370ml</option> 
+<option value="2">200ml</option>
+<option value="3">270ml</option> </select></div>
+
+        </div>
+
+    </div>
+
+   <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>HAIRAPY</h3>
+                <div class="social-icons">
+                    <a href="#"><img src="logo2.png" alt="Facebook"></a>
+                    <a href="#"><img src="logo1.png" alt="Instagram"></a>
+                    <a href="#"><img src="logo4.png" alt="YouTube"></a>
+                    <a href="#"><img src="logo5.png" alt="X"></a>
+                  </div>           
+                 </div>
+            
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="hair care products.html">hair care products </a></li>
+                    <li><a href="shampoos&conditioner.html">shampoo&conditioner</a></li>
+                    <li><a href="hair stylers.html">hair stylers</a></li>
+                    <li><a href="hair accessories.html">hair accessories</a></li>
+                </ul>
+            </div>
+
+          </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 HAIRAPY. All Rights Reserved.</p>
+            <div class="payment-icons">
+                <img src="logo6.png" alt="Visa">
+                <img src="logo7.png" alt="Mastercard">
+                <img src="logo8.png" alt="Gpay">
+                <img src="logo9.png" alt="COD">
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
